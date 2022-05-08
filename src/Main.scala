@@ -197,11 +197,62 @@ class Main extends Application {
     stage.show
 
     println("Antes do loadModels")
-    val lst = loadModels("C:/Users/Paulo Araújo/IdeaProjects/Base_Project2Share/src/modelos.txt")
+    val models = loadModels("C:/Users/Paulo Araújo/IdeaProjects/Base_Project2Share/src/modelos.txt")
+
     val placement1: Placement = ((0, 0, 0), 8.0)
-    val sec1: Section = (((0.0,0.0,0.0), 4.0), lst)
+    val sec1: Section = (((0.0,0.0,0.0), 4.0), models)
     val ocLeaf1 = OcLeaf(sec1)
     val oct1:Octree[Placement] = OcNode[Placement](placement1, ocLeaf1, OcEmpty, OcEmpty, OcEmpty, OcEmpty, OcEmpty, OcEmpty, OcEmpty)
+
+    //T2 criar uma octree de acordo com os modelos gráficos previamente carregados e permitir a sua visualização
+    // (as partições espaciais são representadas com wired cubes). A octree oct1 presente no código fornecido poderá ajudar na interpretação;
+    /*
+        def makeOctree(oct: OcNode[Placement]): Octree[Placement] = {
+          def aux(placement: Placement): Octree[Placement] = {
+
+          }
+        }
+ */
+    def splitNode (box:Box): List[Node] = {
+      val size = box.getWidth/2
+      val tr = size/2
+      val h1:Node = new Box(size, size, size)
+      h1.setTranslateX(tr)
+      h1.setTranslateY(tr)
+      h1.setTranslateZ(tr)
+      val h2:Node = new Box(size, size, size)
+      h2.setTranslateX(-tr)
+      h2.setTranslateY(tr)
+      h2.setTranslateZ(tr)
+      val h3:Node = new Box(size, size, size)
+      h3.setTranslateX(tr)
+      h3.setTranslateY(-tr)
+      h3.setTranslateZ(tr)
+      val h4:Node = new Box(size, size, size)
+      h4.setTranslateX(-tr)
+      h4.setTranslateY(-tr)
+      h4.setTranslateZ(tr)
+      val h5:Node = new Box(size, size, size)
+      h5.setTranslateX(tr)
+      h5.setTranslateY(tr)
+      h5.setTranslateZ(-tr)
+      val h6:Node = new Box(size, size, size)
+      h6.setTranslateX(-tr)
+      h6.setTranslateY(tr)
+      h6.setTranslateZ(-tr)
+      val h7:Node = new Box(size, size, size)
+      h7.setTranslateX(tr)
+      h7.setTranslateY(-tr)
+      h7.setTranslateZ(-tr)
+      val h8:Node = new Box(size, size, size)
+      h8.setTranslateX(-tr)
+      h8.setTranslateY(-tr)
+      h8.setTranslateZ(-tr)
+
+      val list = List(h1,h2,h3,h4,h5,h6,h7,h8)
+      list
+        }
+
 
     //t3
     def isContained(n1: Node): Boolean = {
@@ -242,9 +293,16 @@ class Main extends Application {
     //T5 mapColourEffect(func: Color => Color, oct:Octree[Placement]): Octree[Placement]
     //função de ordem superior que mapeia uma função em todos os modelos gráficos inseridos numa dada octree.
     // Deverá utilizar este método para ilustrar a aplicação dos efeitos sépia1 e “greenRemove” (efeito que remove a componente verde da cor);
+/*
+    def mapColourEffect(func: Color => Color, oct:Octree[Placement]): Octree[Placement] = {
+        def map(oct:Octree[Placement]): Octree[Placement] = oct match {
+          case OcEmpty => oct
+          case OcLeaf(s: Section) =>
+          case
+        }
+    }
 
-
-
+*/
 
     //Mouse left click interaction
     scene.setOnMouseClicked((event) => {
